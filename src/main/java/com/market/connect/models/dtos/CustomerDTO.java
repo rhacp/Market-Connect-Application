@@ -1,5 +1,6 @@
 package com.market.connect.models.dtos;
 
+import com.market.connect.utils.Subscription;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,10 @@ public class CustomerDTO {
     @NotBlank
     @Email
     private String email;
+
+    private boolean active;
+
+    private String city;
+
+    private Subscription subscription;
 }

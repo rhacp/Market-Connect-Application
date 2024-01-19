@@ -2,12 +2,12 @@ package com.market.connect.controllers;
 
 import com.market.connect.models.dtos.CustomerDTO;
 import com.market.connect.services.CustomerService;
+import com.market.connect.utils.Subscription;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -23,5 +23,10 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
         return ResponseEntity.ok(customerService.createCustomer(customerDTO));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<CustomerDTO>> getFilteredTasks(@RequestParam(required = false) Boolean active, @RequestParam(required = false) String city, @RequestParam(required = false) Subscription subscription) {
+        return ResponseEntity.ok(customerService.getFilteredCustomers(active, city, subscription));
     }
 }
